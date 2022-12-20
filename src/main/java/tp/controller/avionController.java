@@ -17,18 +17,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import tp.model.Error;
-import tp.model.V_vehiculesDetails;
-import tp.model.Vehicule;
-import tp.repository.V_vehiculesDetailsReprository;
-import tp.repository.VehiculeRepository;
+import tp.model.V_avionDetails;
+import tp.model.Avion;
+import tp.repository.V_avionDetailsReprository;
+import tp.repository.AvionRepository;
 import tp.util.TokenUtil;
 
 @RestController
-public class VehiculeController {
-    private final  VehiculeRepository repository;
+public class avionController {
+    private final  AvionRepository repository;
     
-    private final  V_vehiculesDetailsReprository v_repository;
-    public VehiculeController(VehiculeRepository rep, V_vehiculesDetailsReprository v){
+    private final  V_avionDetailsReprository v_repository;
+    public avionController(AvionRepository rep, V_avionDetailsReprository v){
         this.repository = rep;
         v_repository = v;
     } 
@@ -36,7 +36,7 @@ public class VehiculeController {
     @GetMapping("/Vehicules")
     public HashMap<String,Object> all(){
         HashMap<String,Object> map = null;
-        List<Vehicule> liste = null;
+        List<Avion> liste = null;
         try{
             liste = repository.findAll();
             map = new HashMap<>();
@@ -50,11 +50,12 @@ public class VehiculeController {
     }
     @CrossOrigin
     @PostMapping("/Vehicules")
-    public Vehicule newVehicules(@RequestHeader(name="modele", required=false) String modele,@RequestHeader(name="matricule", required=false) String matricule, @RequestHeader(name="marqueidmarque", required=false) int marqueidmarque){
-        Vehicule v = new Vehicule();
-        v.setModele(modele);
+    public Avion newVehicules(@RequestHeader(name="idmodele", required=false) int modele,@RequestHeader(name="matricule", required=false) String matricule, @RequestHeader(name="modeleidmodele", required=false) int marqueidmarque,@RequestHeader(name="image", required=false) String image){
+        Avion v = new Avion();
+        v.setIdModele(modele);
         v.setMatricule(matricule);
-        v.setMarqueidMarque(marqueidmarque);
+        v.setIdModele(marqueidmarque);
+        v.setImage(image);
         return repository.save(v);
     }
     @CrossOrigin
@@ -65,9 +66,9 @@ public class VehiculeController {
     }
     @CrossOrigin
     @RequestMapping(value = "/Vehicules/{id}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
-    public HashMap<String,Object> replaceEmployee(@RequestBody Vehicule newV, @PathVariable int id) {
+    public HashMap<String,Object> replaceEmployee(@RequestBody Avion newV, @PathVariable int id) {
         HashMap<String,Object> map = new HashMap<>();
-        Optional<Vehicule> kl = null;
+        Optional<Avion> kl = null;
         try{
             kl = repository.findById(id);
         }
@@ -77,9 +78,9 @@ public class VehiculeController {
         }
         kl.map(
             vec -> {
-                vec.setMarqueidMarque(newV.getMarqueidMarque());
                 vec.setMatricule(newV.getMatricule());
-                vec.setModele(newV.getModele());
+                vec.setIdModele(newV.getIdModele());
+                vec.setImage(newV.getImage());
                 return repository.save(vec);
             });
         map.put("success", "Operation effectué avec succès");
@@ -89,7 +90,7 @@ public class VehiculeController {
     @GetMapping(value = "/Vehicules/{id}/Details")
     public HashMap<String,Object> vehiculeDetails(@PathVariable int id,@RequestHeader(name="token",required=false) String token){
         HashMap<String,Object> map = null;
-        Optional<V_vehiculesDetails> liste = null;
+        List<V_avionDetails> liste = null;
         if(token == null || token.equals("")){
             Error err = new Error();
             return err.getError("You're not autorizhed");
@@ -101,9 +102,9 @@ public class VehiculeController {
                 return err.getError("You're not autorizhed");
             }
             try{
-                liste = v_repository.findById(id);
+                liste = v_repository.detailsForPlane(id);
                 map = new HashMap<>();
-                map.put("data",liste.get());
+                map.put("data",liste);
             }
             catch(Exception e){
                 Error err = new Error();
