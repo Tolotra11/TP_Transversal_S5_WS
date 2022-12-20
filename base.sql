@@ -44,3 +44,24 @@ ALTER TABLE Kilometrage ADD CONSTRAINT FKKilometrag349088 FOREIGN KEY (AvionidAv
 ALTER TABLE Entretien ADD CONSTRAINT FKEntretien930062 FOREIGN KEY (TypeEntretienidTypeEntretien) REFERENCES TypeEntretien (idTypeEntretien);
 ALTER TABLE Entretien ADD CONSTRAINT FKEntretien783295 FOREIGN KEY (AvionidAvion) REFERENCES Avion (idAvion);
 ALTER TABLE Assurance ADD CONSTRAINT FKAssurance14862 FOREIGN KEY (AvionidAvion) REFERENCES Avion (idAvion);
+
+
+CREATE OR REPLACE VIEW V_avion AS 
+SELECT idAvion,matricule,idModele,image,nomModele,nbPlace,serie FROM Avion a
+JOIN Modele m 
+ON a.ModeleidModele = m.idModele;
+
+CREATE OR REPLACE VIEW V_entretien AS 
+SELECT idEntretien,dateEntretien,idTypeEntretien,AvionidAvion,type FROM Entretien e
+JOIN TypeEntretien te 
+ON e.TypeEntretienidTypeEntretien = te.idTypeEntretien;
+
+
+CREATE OR REPLACE VIEW v_avionDetails AS 
+SELECT idAvion,matricule,idModele,image,nomModele,nbPlace,serie,idEntretien,dateEntretien,idTypeEntretien,type,idKilometrage,dateKilometrage,debutKm,finKm,idAssurance,datePaiement,dateExpiration,prix FROM V_avion va
+JOIN V_entretien ve 
+ON va.idAvion = ve.AvionidAvion
+JOIN Kilometrage k
+ON va.idAvion = k.AvionidAvion
+JOIN Assurance a
+ON va.idAvion = a.AvionidAvion;
