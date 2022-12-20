@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -19,12 +20,12 @@ public class Utilisateurcontroller {
 	public UtilisateurRepository uinterface;
 	
 	
-	
+	@CrossOrigin
 	@GetMapping("/utilisateurs")
 	public  ArrayList<Utilisateur> findAll() {
 		return uinterface.findAll();
 	}
-	
+	@CrossOrigin
 	@PostMapping("/utilisateurs")
 	public HashMap<String,Object> login(@RequestHeader(name="email",required=true)String email,@RequestHeader(name="mdp",required=true)String mdp) {
 		HashMap<String,Object> liste = new HashMap<>();
