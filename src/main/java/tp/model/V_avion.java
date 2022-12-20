@@ -1,6 +1,8 @@
 package tp.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 // CREATE OR REPLACE VIEW V_avion AS 
@@ -11,12 +13,20 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "v_avion")
 public class V_avion {
+    @Id
+    @Column(name= "idavion")
     private int idAvion;
+    @Column(name= "matricule")
     private String matricule;
+    @Column(name= "idmodele")
     private int idModele;
+    @Column(name= "image")
     private String image;
+    @Column(name = "nommodele")
     private String nomModele;
+    @Column(name = "nbplace")
     private int nbPlace;
+    @Column(name = "serie")
     private String serie;
     public int getIdAvion() {
         return idAvion;
