@@ -48,7 +48,7 @@ public class KilometrageController {
         km.setDateKilometrage(Date.valueOf(date));
         km.setDebutKm(debutkm);
         km.setFinKm(finkm);
-        km.setVehiculeidVehicule(idVehicule);
+        km.setAvionIdAvion(idVehicule);
         return repository.save(km);
     }
     @DeleteMapping("/Kilometrages/{id}")
@@ -72,7 +72,7 @@ public class KilometrageController {
                 Kilometrages.setDateKilometrage(newKm.getDateKilometrage());
                 Kilometrages.setDebutKm(newKm.getDebutKm());
                 Kilometrages.setFinKm(newKm.getFinKm());
-                Kilometrages.setVehiculeidVehicule(newKm.getVehiculeidVehicule());
+                Kilometrages.setAvionIdAvion(newKm.getAvionIdAvion());
                 return repository.save(Kilometrages);
             });
         map.put("succes", "Operation effectué avec succès");
