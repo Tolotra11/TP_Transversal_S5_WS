@@ -1,0 +1,42 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch TpApplication",
+            "request": "launch",
+            "mainClass": "tp.TpApplication",
+            "projectName": "tp"
+        },
+        {
+            "type": "java",
+            "name": "Launch TpApplication",
+            "request": "launch",
+            "mainClass": "tp.TpApplication",
+            "projectName": "kanteco"
+        },
+        {
+            "type": "java",
+            "name": "Launch VehiculeController",
+            "request": "launch",
+            "mainClass": "controller.VehiculeController",
+            "projectName": "kanteco"
+        },
+        {
+            "type": "java",
+            "name": "Launch TpApplication",
+            "request": "launch",
+            "mainClass": "controller.TpApplication",
+            "projectName": "kanteco"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-TpApplication<kanteco>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "TpApplication",
+            "projectName": "kanteco",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
