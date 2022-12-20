@@ -136,3 +136,11 @@ insert into Modele values(default,'Boeing',400,'787');
   insert into Kilometrage values(default,'2022-12-25',100434.11,103934.10,5);
 
 insert into Utilisateur values(default,'groupe1@gmail.com',md5('root'));
+
+CREATE OR REPLACE  View V_MoisExpirationAssurance AS
+SELECT avionidavion,extract(year from age(max(dateExpiration),CURRENT_DATE))*12+extract(month from age(max(dateExpiration),CURRENT_DATE)) as moisExpiration,max(dateExpiration) as dateExpiration FROM Assurance GROUP BY avionidavion;
+
+CREATE OR REPLACE View V_MoisExpirationAssuranceDetail AS
+SELECT v.*,moisExpiration,dateexpiration FROM v_avion v
+JOIN V_MoisExpirationAssurance va 
+ON v.idavion = va.avionidavion;
