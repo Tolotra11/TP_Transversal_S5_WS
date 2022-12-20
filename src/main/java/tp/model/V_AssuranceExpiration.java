@@ -32,7 +32,7 @@ public class V_AssuranceExpiration {
     private String serie;
     @Column(name = "moisexpiration")
     private double moisExpiration;
-    @Column(name = "dateExpiration")
+    @Column(name = "dateexpiration")
     private Date dateExpiration;
     public int getIdAvion() {
         return idAvion;

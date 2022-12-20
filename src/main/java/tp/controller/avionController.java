@@ -17,28 +17,31 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import tp.model.Error;
+import tp.model.V_avion;
 import tp.model.V_avionDetails;
 import tp.model.Avion;
 import tp.repository.V_avionDetailsReprository;
+import tp.repository.V_avionRepository;
 import tp.repository.AvionRepository;
 import tp.util.TokenUtil;
 
 @RestController
 public class avionController {
     private final  AvionRepository repository;
-    
+    private final V_avionRepository v_avion;
     private final  V_avionDetailsReprository v_repository;
-    public avionController(AvionRepository rep, V_avionDetailsReprository v){
+    public avionController(AvionRepository rep, V_avionDetailsReprository v,V_avionRepository va){
         this.repository = rep;
         v_repository = v;
+        v_avion = va;
     } 
     @CrossOrigin 
     @GetMapping("/avions")
     public HashMap<String,Object> all(){
         HashMap<String,Object> map = null;
-        List<Avion> liste = null;
+        List<V_avion> liste = null;
         try{
-            liste = repository.findAll();
+            liste = v_avion.findAll();
             map = new HashMap<>();
             map.put("data",liste);
         }
