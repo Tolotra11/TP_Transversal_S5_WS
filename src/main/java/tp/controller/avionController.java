@@ -33,7 +33,7 @@ public class avionController {
         v_repository = v;
     } 
     @CrossOrigin 
-    @GetMapping("/Vehicules")
+    @GetMapping("/avions")
     public HashMap<String,Object> all(){
         HashMap<String,Object> map = null;
         List<Avion> liste = null;
@@ -49,7 +49,7 @@ public class avionController {
         return map;
     }
     @CrossOrigin
-    @PostMapping("/Vehicules")
+    @PostMapping("/avions")
     public Avion newVehicules(@RequestHeader(name="idmodele", required=false) int modele,@RequestHeader(name="matricule", required=false) String matricule, @RequestHeader(name="modeleidmodele", required=false) int marqueidmarque,@RequestHeader(name="image", required=false) String image){
         Avion v = new Avion();
         v.setIdModele(modele);
@@ -59,13 +59,13 @@ public class avionController {
         return repository.save(v);
     }
     @CrossOrigin
-    @DeleteMapping("/Vehicules/{id}")
+    @DeleteMapping("/avions/{id}")
     public void deleteVehicule(@PathVariable int id){
         repository.deleteById(id);
         
     }
     @CrossOrigin
-    @RequestMapping(value = "/Vehicules/{id}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
+    @RequestMapping(value = "/avions/{id}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
     public HashMap<String,Object> replaceEmployee(@RequestBody Avion newV, @PathVariable int id) {
         HashMap<String,Object> map = new HashMap<>();
         Optional<Avion> kl = null;
@@ -87,7 +87,7 @@ public class avionController {
         return map;
     }
     @CrossOrigin
-    @GetMapping(value = "/Vehicules/{id}/Details")
+    @GetMapping(value = "/avions/{id}/Details")
     public HashMap<String,Object> vehiculeDetails(@PathVariable int id,@RequestHeader(name="token",required=false) String token){
         HashMap<String,Object> map = null;
         List<V_avionDetails> liste = null;
