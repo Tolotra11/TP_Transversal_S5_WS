@@ -23,8 +23,14 @@ public class Assurance {
     private Date dateexpiration;
     @Column(name = "prix")
     private double prix;
-    @Column(name = "vehiculeidvehicule")
-    private int vehiculeidvehicule;
+    @Column(name = "avionidavion")
+    private int avionIdAvion;
+    public int getAvionIdAvion() {
+        return avionIdAvion;
+    }
+    public void setAvionIdAvion(int avionIdAvion) {
+        this.avionIdAvion = avionIdAvion;
+    }
     public int getId() {
         return id;
     }
@@ -48,12 +54,6 @@ public class Assurance {
     }
     public void setPrix(double prix) {
         this.prix = prix;
-    }
-    public int getVehiculeidvehicule() {
-        return vehiculeidvehicule;
-    }
-    public void setVehiculeidvehicule(int vehiculeidvehicule) {
-        this.vehiculeidvehicule = vehiculeidvehicule;
     }
     
 }

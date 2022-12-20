@@ -46,12 +46,12 @@ public class Kilometrage {
     public void setFinKm(double finKm) {
         this.finKm = finKm;
     }
-    @Column(name = "vehiculeidvehicule")
-    private int vehiculeidVehicule;
-    public int getVehiculeidVehicule() {
-        return vehiculeidVehicule;
+    @Column(name = "avionidavion")
+    private int avionIdAvion;
+    public int getAvionIdAvion() {
+        return avionIdAvion;
     }
-    public void setVehiculeidVehicule(int vehiculeidVehicule) {
-        this.vehiculeidVehicule = vehiculeidVehicule;
+    public void setAvionIdAvion(int avionIdAvion) {
+        this.avionIdAvion = avionIdAvion;
     }
 }
